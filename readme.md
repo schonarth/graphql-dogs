@@ -23,7 +23,8 @@ You can find your pooch by any of the fields there, or a combination of them!
 
 ## Things to improve
 
-* Make the search match partial results
+* Restrict to matches from all fields
 * Unite the fields into a single one, and figure the query out on the backend
 * Bring the data dynamically from an external API.
+* Cache queries
 * Make it look pretty! ^_^

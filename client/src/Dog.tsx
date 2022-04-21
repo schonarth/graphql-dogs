@@ -5,6 +5,7 @@ interface iProps {
   bredFor?: string;
   breedGroup?: string;
   name?: string;
+  limit?: number;
 }
 
 type Props = iProps;
@@ -15,8 +16,8 @@ const imgStyle = {
 }
 
 function Dogs(props: Props) {
-  const DOGS_QUERY = `query Dogs($id: Int, $name: String, $bredFor: String, $breedGroup: String) {
-    dogs(id: $id, name: $name, bred_for: $bredFor, breed_group: $breedGroup) {
+  const DOGS_QUERY = `query Dogs($id: Int, $name: String, $bredFor: String, $breedGroup: String, $limit: Int) {
+    dogs(id: $id, name: $name, bred_for: $bredFor, breed_group: $breedGroup, limit: $limit) {
       id
       name
       bred_for
@@ -41,11 +42,13 @@ function Dogs(props: Props) {
   return (
     <table>
       <thead>
-        <th>id</th>
-        <th>Name</th>
-        <th>Photo</th>
-        <th>Bred for</th>
-        <th>Breed group</th>
+        <tr>
+          <th>id</th>
+          <th>Name</th>
+          <th>Photo</th>
+          <th>Bred for</th>
+          <th>Breed group</th>
+        </tr>
       </thead>
       <tbody>
 
@@ -58,7 +61,7 @@ function Dogs(props: Props) {
               </strong>
             </td>
             <td>
-              <img src={image.url} style={imgStyle} />
+              <img src={image.url} style={imgStyle} alt={name} />
             </td>
             <td>
               {bred_for}

@@ -6,7 +6,7 @@ const { buildSchema } = require('graphql')
 const schema = buildSchema(`
   type Query {
     hello: String!
-    dogs(id:Int, life_span:String, bred_for:String, breed_group:String, name:String): [Dog]
+    dogs(id:Int, life_span:String, bred_for:String, breed_group:String, name:String, limit: Int): [Dog]!
   }
 
   type Dog {
@@ -52,13 +52,25 @@ function getDogs(params) {
   console.log('params', params)
   const rawDogs = getRawDogs();
 
+  let matches = 0;
   const dogs = rawDogs.filter(dog => {
+    if (params.limit && matches >= params.limit) return false;
+
     for (let key in params) {
-      const dogParam = (typeof dog[key] === 'string') ? dog[key].toLowerCase() : dog[key];
+      if (key === 'limit') break;
+
+      const isString = typeof dog[key] === 'string';
+      const dogParam = (isString) ? dog[key].toLowerCase() : dog[key];
       const currentParam = (typeof params[key] === 'string') ? params[key]?.toLowerCase() : params[key];
       if (dogParam === undefined || (!!currentParam && dogParam !== currentParam))
+        if (isString && dogParam.includes(currentParam)) {
+          console.log('match', key, currentParam, dogParam)
+          matches++;
+          return true;
+        }
         return false;
     }
+    matches++;
     return true;
   });
 

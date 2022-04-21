@@ -1,5 +1,4 @@
-import React, { ReactHTMLElement, useState } from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 import GraphqlProvider from './GraphqlProvider'
 import Dogs from './Dog';
@@ -9,6 +8,7 @@ function App() {
   const [bredForState, changeBredForState] = useState('')
   const [breedGroupState, changeBreedGroupState] = useState('')
   const [nameState, changeNameState] = useState('')
+  const [limitState, changeLimitState] = useState(10);
 
 
   function handleIdChange(event: React.FormEvent<HTMLInputElement>) {
@@ -25,6 +25,9 @@ function App() {
   }
   function handleNameChange(event: React.FormEvent<HTMLInputElement>) {
     changeNameState(event.currentTarget.value);
+  }
+  function handleLimitChange(event: React.FormEvent<HTMLInputElement>) {
+    changeLimitState(parseInt(event.currentTarget.value));
   }
 
   return (
@@ -45,8 +48,12 @@ function App() {
         <label>Name</label>
         <input onChange={handleNameChange} />
       </div>
+      <div>
+        <label>Limit</label>
+        <input type="range" min={1} max={100} onChange={handleLimitChange} /> {limitState}
+      </div>
       <GraphqlProvider>
-        <Dogs id={idState} bredFor={bredForState} breedGroup={breedGroupState} name={nameState}></Dogs>
+        <Dogs id={idState} bredFor={bredForState} breedGroup={breedGroupState} name={nameState} limit={limitState}></Dogs>
       </GraphqlProvider>
     </div>
   );
