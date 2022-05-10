@@ -32,7 +32,7 @@ function Dogs(props: Props) {
     variables: filterEmptyProps(props)
   })
 
-  if (loading) return <>Loading...</>
+  if (loading) return <div className="alert alert-info">Loading...</div>
   if (error) {
     return <>Something bad happened</>
   }
@@ -40,39 +40,41 @@ function Dogs(props: Props) {
   const dogs: DogType[] = data.dogs;
 
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>id</th>
-          <th>Name</th>
-          <th>Photo</th>
-          <th>Bred for</th>
-          <th>Breed group</th>
-        </tr>
-      </thead>
-      <tbody>
-
-        {dogs.map(({ id, name, image, bred_for, breed_group }) => (
-          <tr key={id?.toString()}>
-            <td>{id?.toString()}</td>
-            <td>
-              <strong>
-                {name}
-              </strong>
-            </td>
-            <td>
-              <img src={image.url} style={imgStyle} alt={name} />
-            </td>
-            <td>
-              {bred_for}
-            </td>
-            <td>
-              <i>{breed_group}</i>
-            </td>
+    <div className="table-responsive-sm">
+      <table className="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>id</th>
+            <th>Name</th>
+            <th>Photo</th>
+            <th>Bred for</th>
+            <th>Breed group</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+
+          {dogs.map(({ id, name, image, bred_for, breed_group }) => (
+            <tr key={id?.toString()}>
+              <td>{id?.toString()}</td>
+              <td>
+                <strong>
+                  {name}
+                </strong>
+              </td>
+              <td>
+                <img src={image.url} style={imgStyle} alt={name} />
+              </td>
+              <td>
+                {bred_for}
+              </td>
+              <td>
+                <i>{breed_group}</i>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }
 

@@ -21,10 +21,16 @@ Just open another terminal into the `client` folder and run `npm install` and `n
 
 You can find your pooch by any of the fields there, or a combination of them!
 
+## What's New
+
+* Improved matching algorithm for better reliability on the back end
+* Improved overall look and feel. Not that this is beautiful now, but boy it was ugly before.
+* Added some form validation with [react-hook-form](https://react-hook-form.com/) just because.
+  * *Any one* of the fields is required, but not any one in particular. The **Submit** button is there now just to trigger the validation, therefore, since the results come *on-the-fly*.
+  * All fields have some max length with their own validation message.
+
 ## Things to improve
 
-* Restrict to matches from all fields
+* Restrict to matches from all fields (currently matching *any* fields)
 * Unite the fields into a single one, and figure the query out on the backend
 * Bring the data dynamically from an external API.
-* Cache queries
-* Make it look pretty! ^_^

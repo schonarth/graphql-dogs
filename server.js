@@ -62,6 +62,7 @@ function getDogs(params) {
       const isString = typeof dog[key] === 'string';
       const dogParam = (isString) ? dog[key].toLowerCase() : dog[key];
       const currentParam = (typeof params[key] === 'string') ? params[key]?.toLowerCase() : params[key];
+      if (dogParam !== undefined && currentParam !== undefined && dogParam === currentParam) return true;
       if (dogParam === undefined || (!!currentParam && dogParam !== currentParam))
         if (isString && dogParam.includes(currentParam)) {
           console.log('match', key, currentParam, dogParam)
