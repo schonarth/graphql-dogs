@@ -49,7 +49,6 @@ app.use('/graphql', graphqlHTTP({
 app.listen(4000, () => console.log('now browse to http://localhost:4000/graphql'))
 
 function getDogs(params) {
-  console.log('params', params)
   const rawDogs = getRawDogs();
 
   let matches = 0;
@@ -65,7 +64,6 @@ function getDogs(params) {
       if (dogParam !== undefined && currentParam !== undefined && dogParam === currentParam) return true;
       if (dogParam === undefined || (!!currentParam && dogParam !== currentParam))
         if (isString && dogParam.includes(currentParam)) {
-          console.log('match', key, currentParam, dogParam)
           matches++;
           return true;
         }
